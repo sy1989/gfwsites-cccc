@@ -27,7 +27,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: My
-      run: cd ./gfwsites/bin/Debug/net8.0/
-           pwd
+      run: |
+         cd ./gfwsites/bin/Debug/net8.0/
+         pwd
     - name: Run
       run: dotnet run
