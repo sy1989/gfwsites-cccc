@@ -31,9 +31,9 @@ jobs:
          cd ./gfwsites/bin/Release/net8.0/
          git clone https://github.com/v2fly/domain-list-community.git
          ls
-         cd ./data
+         cd ./domain-list-community/data
          ls
     - name: Run
       run: |
          cd ./gfwsites/bin/Release/net8.0/
-         dotnet ./gfwsites.dll ./data
+         dotnet ./gfwsites.dll ./domain-list-community/data
