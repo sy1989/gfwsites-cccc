@@ -6,6 +6,7 @@
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine(System.Environment.CurrentDirectory);
+            Console.WriteLine(args[0]);
 
         }
     }
