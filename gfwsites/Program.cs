@@ -8,6 +8,10 @@ namespace gfwsites
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine(System.Environment.CurrentDirectory);
+            foreach(var x in args)
+            {
+                Console.WriteLine(x);
+            }
             var config_file = args[0];
             var config = Configs.LoadConfiguration(config_file);
             var datapath = args[1];
