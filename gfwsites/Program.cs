@@ -16,7 +16,7 @@ namespace gfwsites
             var config = Configs.LoadConfiguration(config_file);
             var datapath = args[1];
             var savepath = Directory.CreateDirectory("save");
-            foreach(var a in config.Config)
+            foreach(var a in config)
             {
                 var filename =Path.Combine(savepath.FullName, a.Key);
                 var c  = new StringBuilder();
