@@ -23,6 +23,7 @@ namespace gfwsites
                 foreach (var b in a.Value)
                 {
                     var datafile = Path.Combine(datapath, b);
+                    Console.WriteLine(datafile);
                     var sr = GetData(datafile);
                     if(!string.IsNullOrEmpty(sr) )
                     {
@@ -38,7 +39,7 @@ namespace gfwsites
             var sb = new StringBuilder();
             foreach (var b in a)
             {
-                var c = GetData(b);
+                var c = GetDomain(b);
                 if (!string.IsNullOrEmpty(c))
                 {
                     sb.AppendLine(c);
