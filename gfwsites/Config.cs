@@ -9,14 +9,14 @@ namespace gfwsites
 {
     internal class Configs
     {
-        public static Configs LoadConfiguration(string filename)
+        public static Dictionary<string, List<string>> LoadConfiguration(string filename)
         {
             TextReader reader = new StreamReader(filename);
             string json = reader.ReadToEnd();
             reader.Close();
-            Configs config = JsonConvert.DeserializeObject<Configs>(json);
+            var config = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
             return config;
         }
-        public Dictionary<string, List<string>> Config { get; set; }
+        
     }
 }
