@@ -27,10 +27,11 @@ namespace gfwsites
                     var sr = GetData(datafile);
                     if(!string.IsNullOrEmpty(sr) )
                     {
-                        c.AppendLine(sr);
+                        c.Append(sr);
                     }
                 }
-                File.WriteAllText(filename, c.ToString());
+                
+                File.WriteAllText(filename, c.ToString().Trim());
             }
         }
         static string GetData(string filename)
