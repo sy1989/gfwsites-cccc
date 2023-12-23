@@ -59,7 +59,7 @@ namespace gfwsites
                 return null;
             else if (a.Contains("."))
             {
-                if (a.StartsWith("regexp:")|| a.StartsWith("regexp:"))
+                if (a.StartsWith("regexp:")|| a.StartsWith("include:"))
                 {
                     return null;
                 }
