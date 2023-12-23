@@ -33,5 +33,5 @@ jobs:
          ls
     - name: Run
       run: |
-         dotnet ./gfwsites/bin/Release/net8.0/gfwsites.dll "./config.json" "./gfwsites/bin/Release/net8.0/domain-list-community/data"
+         dotnet ./gfwsites/bin/Release/net8.0/gfwsites.dll ./config.json,./gfwsites/bin/Release/net8.0/domain-list-community/data
          ls
