@@ -46,7 +46,8 @@ jobs:
         cd gfwlist2dnsmasq || exit 1
         chmod +x ./gfwlist2dnsmasq.sh
         ./gfwlist2dnsmasq.sh -l -o ../community/data/gfwlist
-    - uses: mmoyaferrer/set-github-variable@v1.0.0
+    - name: Update_SHA
+      uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
       name: 'DATA_SHA'
       value: 'Hello World'
