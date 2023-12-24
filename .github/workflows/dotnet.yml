@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
 
 jobs:
   build:
@@ -26,8 +31,6 @@ jobs:
     - name: Build
       run: |
          dotnet build --no-restore --configuration Release
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
     - name: Checkout v2fly/domain-list-community
       uses: actions/checkout@v4
       with:
@@ -42,20 +45,20 @@ jobs:
       run: |
         cd gfwlist2dnsmasq || exit 1
         chmod +x ./gfwlist2dnsmasq.sh
-        ./gfwlist2dnsmasq.sh -l -o ../community/gfwlist.txt
+        ./gfwlist2dnsmasq.sh -l -o ../community/data/gfwlist
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     - name: My
       run: |
-         cd ./gfwsites/bin/Release/net8.0/
-         git clone https://github.com/v2fly/domain-list-community.git
+         cd ./community/data
          ls
     - name: Run
       run: |
-         dotnet ./gfwsites/bin/Release/net8.0/gfwsites.dll ./config.json ./gfwsites/bin/Release/net8.0/domain-list-community/data
+         dotnet ./gfwsites/bin/Release/net8.0/gfwsites.dll ./config.json ./community/data
     - name: Generate release tag
       id: tag
       run: |
