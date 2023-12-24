@@ -28,6 +28,26 @@ jobs:
          dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Checkout v2fly/domain-list-community
+      uses: actions/checkout@v4
+      with:
+        repository: v2fly/domain-list-community
+        path: community
+    - name: Checkout cokebar/gfwlist2dnsmasq
+      uses: actions/checkout@v4
+      with:
+        repository: cokebar/gfwlist2dnsmasq
+        path: gfwlist2dnsmasq
+    - name: Generate GFWList domains
+      run: |
+        cd gfwlist2dnsmasq || exit 1
+        chmod +x ./gfwlist2dnsmasq.sh
+        ./gfwlist2dnsmasq.sh -l -o ../community/gfwlist.txt
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     - name: My
       run: |
          cd ./gfwsites/bin/Release/net8.0/
