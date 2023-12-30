@@ -26,6 +26,7 @@ jobs:
     - name: Get Version
       id: check
       run: |
+        OPENWRTVERSION=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
         ODATA_SHA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
         OGFW_SHA=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
         echo "$ODATA_SHA"
