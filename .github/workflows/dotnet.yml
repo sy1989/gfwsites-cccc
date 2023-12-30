@@ -28,9 +28,9 @@ jobs:
       run: |
         OPENWRTVERSION=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
         OGFW_SHA=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
-        echo "$ODATA_SHA"
+        echo "$OPENWRTVERSION"
         echo "$OGFW_SHA"
-        echo "DATA_GFW=${{ODATA_SHA}}_${{OGFW_SHA}}" >> $GITHUB_ENV
+        echo "DATA_GFW=${{OGFW_SHA}}" >> $GITHUB_ENV
     - name: Check Version
       if: env.DATA_GFW != vars.DATA_SHA || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
       run: |
