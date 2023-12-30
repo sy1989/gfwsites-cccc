@@ -30,6 +30,7 @@ jobs:
         GFW=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
         echo "$DATA"
         echo "$GFW"
+        echo ${{vars.DATA_SHA}}
         echo "DATA_GFW=${DATA}_${GFW}" >> $GITHUB_ENV
     - name: Check Version
       if: env.DATA_GFW != vars.DATA_SHA || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
