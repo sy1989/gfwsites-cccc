@@ -26,6 +26,8 @@ jobs:
     - name: Get Version
       id: check
       run: |
+        OPENWRTVERSION=$(wget -q -O - https://downloads.openwrt.org/releases/ | grep -E -o '<tr><td class="n"><a href="[0-9]+\.[0-9]+\.[0-9]+/' | tail -1|grep -E -o -m1 '[0-9]+\.[0-9]+\.[0-9]+[-rc]*[0-9]*')
+        echo "$OPENWRTVERSION"
         DATA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
         GFW=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
         echo "$DATA"
