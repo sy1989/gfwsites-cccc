@@ -26,13 +26,11 @@ jobs:
     - name: Get Version
       id: check
       run: |
-        OPENWRTVERSION=$(wget -q -O - https://downloads.openwrt.org/releases/ | grep -E -o '<tr><td class="n"><a href="[0-9]+\.[0-9]+\.[0-9]+/' | tail -1|grep -E -o -m1 '[0-9]+\.[0-9]+\.[0-9]+[-rc]*[0-9]*')
-        echo "$OPENWRTVERSION"
-        DATA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
-        GFW=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
-        echo "$DATA"
-        echo "$GFW"
-        echo "DATA_GFW=${{DATA}}_${{GFW}}" >> $GITHUB_ENV
+        DATA_SHA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
+        GFW_SHA=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
+        echo "$DATA_SHA"
+        echo "$GFW_SHA"
+        echo "DATA_GFW=${{DATA_SHA}}_${{GFW_SHA}}" >> $GITHUB_ENV
     - name: Check Version
       if: env.DATA_GFW != vars.DATA_SHA || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
       run: |
