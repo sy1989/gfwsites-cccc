@@ -26,11 +26,11 @@ jobs:
     - name: Get Version
       id: check
       run: |
-        DATA_SHA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
-        GFW_SHA=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
-        echo "$DATA_SHA"
-        echo "$GFW_SHA"
-        echo "DATA_GFW=${{DATA_SHA}}_${{GFW_SHA}}" >> $GITHUB_ENV
+        ODATA_SHA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
+        OGFW_SHA=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
+        echo "$ODATA_SHA"
+        echo "$OGFW_SHA"
+        echo "DATA_GFW=${{ODATA_SHA}}_${{OGFW_SHA}}" >> $GITHUB_ENV
     - name: Check Version
       if: env.DATA_GFW != vars.DATA_SHA || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
       run: |
