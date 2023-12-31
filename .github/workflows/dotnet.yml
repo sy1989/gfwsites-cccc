@@ -65,14 +65,6 @@ jobs:
         cd gfwlist2dnsmasq || exit 1
         chmod +x ./gfwlist2dnsmasq.sh
         ./gfwlist2dnsmasq.sh -l -o ../community/data/gfwlist
-    - name: Update_SHA
-      uses: NikhilVashistha/update-github-action-secret@v1.0.3
-      if: env.JIXU == 'true'
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        variable: true
-        variable_name: 'DATA_SHA'
-        variable_value: ${{ env.DATA_GFW }}
     - name: Run
       if: env.JIXU == 'true'
       run: |
@@ -95,6 +87,14 @@ jobs:
         tag_name: ${{ env.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
+    - name: Update_SHA
+      uses: NikhilVashistha/update-github-action-secret@v1.0.3
+      if: env.JIXU == 'true'
+      with:
+        github_token: ${{ secrets.TOKEN }}
+        variable: true
+        variable_name: 'DATA_SHA'
+        variable_value: ${{ env.DATA_GFW }}
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v2
       if: env.JIXU == 'true'
