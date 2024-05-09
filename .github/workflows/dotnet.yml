@@ -26,6 +26,7 @@ jobs:
     - name: Get Version
       id: check
       run: |
+        echo ${{env.GITHUB_EVENT_NAME}}
         DATA=$(git ls-remote  https://github.com/v2fly/domain-list-community HEAD | head -n 1 | cut -f1)
         GFW=$(git ls-remote  https://github.com/gfwlist/gfwlist/ HEAD | head -n 1 | cut -f1)
         echo "$DATA"
