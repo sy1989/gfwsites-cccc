@@ -34,7 +34,7 @@ jobs:
         echo ${{vars.DATA_SHA}}
         echo "DATA_GFW=${DATA}_${GFW}" >> $GITHUB_ENV
     - name: Check Version
-      if: env.DATA_GFW != vars.DATA_SHA || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
+      if: env.DATA_GFW != vars.DATA_SHA || github.event_name == 'push' || ( github.event.inputs.force != 'false' && github.event.inputs.force != '')
       run: |
         echo "JIXU=true" >> $GITHUB_ENV      
            
