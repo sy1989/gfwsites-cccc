@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Get Version
       id: check
       run: |
@@ -39,7 +39,7 @@ jobs:
         echo "JIXU=true" >> $GITHUB_ENV      
            
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       if: env.JIXU == 'true'
       with:
         dotnet-version: 6.0.x
@@ -80,7 +80,7 @@ jobs:
         cd save
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: env.JIXU == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -103,7 +103,7 @@ jobs:
         retain_days: 3
         keep_minimum_runs: 5
     - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.1
+      uses: dev-drprasad/delete-older-releases@v0.3.4
       if: env.JIXU == 'true'
       with:
         keep_latest: 10
